@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+{{block.super}}
+{% include 'navbar.html'%}
+
+<div class="row"  style="margin-left:10px;">
+    <div class="col-md-4 text-center">
+            <div class="flip-card">
+                    <div class="flip-card-inner">
+                        {% for teach in teachers %}
+                      <div class="flip-card-front">
+                            <h1>Name  {{ teach.name }}</h1>
+                            <img src="{{ teach.teach_pic.url }}" alt="image">
+                            <p>Subjects I teach ; ({{ teach.subject }})</p>
+                      </div>
+                      <div class="flip-card-back">
+                            <div class="row">
+                                  <div class="col-md-3">
+                                          <p style="color:brown;">Gender :</p>
+                                          <p>{{ teach.gender }}</p>
+                                  </div>
+                                  <div class="col-md-3">
+                                          <p style="color:brown;">The school I teach in : </p>
+                                          <p>{{ teach.school }}</p>
+                                  </div>
+                                  <div class="col-md-3">
+                                          <p style="color:brown;">Available :</p>
+                                          <p>{{ teach.available }}</p>
+                                  </div>
+                                  <div class="col-md-3">
+                                          <p style="color:brown;">Phone number :</p>
+                                          <p>{{ teach.number }}</p>
+                                  </div>
+                            </div>
+                            <a href=""><button class="btn btn-success text-center">Book teacher</button></a>
+                      </div>
+                      {% endfor %}
+                    </div>
+            </div>
+       </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load bootstrap3%}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/1.1.0/css/material-kit.css">
+<style>
+body {
+         background-color: wheat;
+        }
+
+</style>
+
+<body>
+    {% for teach in teacher %}
+    <div class="card" style="width: 300px; height: 550px; margin-left: 33em;">
+      <img class="card-img-top" style="width: 300px; height: 200px;" src="{{teach.teach_pic.url}}" alt="Card image cap">
+      <div class="card-body">
+         <div class="row">
+             <div class="col-md-4">
+                <h5 class="card-title">{{teach.name}}</h5>
+             </div>
+             <div class="col-md-8">
+                <a href="{% url 'exitteacher' %}"><button class="btn btn-danger enterhoodbtn navigation">End Booking</button></a>
+             </div>
+         </div>
+
+        <p class="card-text">{{teach.subject}}</p>
+         <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>gender:   {{teach.gender}}</strong></li>
+          <li class="list-group-item"><strong>School: {{teach.school}}</strong></li>
+          <li class="list-group-item"><strong>Available:    {{teach.available}}</strong></li>
+         </ul>
+      <div class="row">
+          <div class="col-md-6">
+              <a href="{% url 'post' %}"><button class="btn btn-success">New comment</button></a>
+              {% for comment in post.comment.all %}
+                <li style="list-style: none;">
+                    {{comment.user.username}}
+                    {{comment.comment}}
+                </li>
+             {% endfor%}
+                <form action="/comment/{{post.id}}" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <input type="submit" class="btn btn-success btn-lg" value="comment">
+                </form>
+          </div>
+          
+      </div>
+   </div>
+    <a  href="{% url 'newbiz' %}"><button style="width: 130px;" class="btn btn-success">Edit Business</button></a>
+</div>
+{% endfor %}
+</body>
+{% endblock %}

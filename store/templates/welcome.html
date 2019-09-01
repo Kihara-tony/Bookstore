@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+<body style="background-image:url(https://static.wixstatic.com/media/766da2_7d093f16622f4f0294d1d54dcd596ceb.jpg);background-size: cover;background-position: center;background-blend-mode: blur(8px);">
+    <div class="container text-center" style="margin-top:10%;">
+        <h1 style="color: white;font-family: 'Abril Fatface', cursive;font-size: 5em;">SOMA KENYA</h1>
+        <p style="color: brown;padding-bottom: 10%;font-family: 'Righteous', cursive;font-size:3em;">Giving a tunnel to a better education.</p>
+        <div class="col-md-3" style="margin-left:38%;">
+                <a href="{% url 'books'%}"><button class="btn btn-success">Start soma</button></a>
+            <a href="{% url 'about'%}"><button class="btn btn-success">ABOUT US</button></a>
+        </div>
+        
+    </div>
+</body>
+{% endblock %}
