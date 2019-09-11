@@ -68,7 +68,7 @@ class Books(models.Model):
     author =models.CharField(max_length=25,null=False)
     pic_cover= models.ImageField(upload_to='media/', null=True)
     content= models.FileField(upload_to='pdfs/',null=False)
-    text=models.TextField(upload_to='pdfs/',null=False)
+    # text=models.TextField(upload_to='pdfs/',null=False)
     def __str__(self):
         return self.author
 
