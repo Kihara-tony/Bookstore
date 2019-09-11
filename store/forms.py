@@ -7,10 +7,10 @@ class BooksForm(forms.ModelForm):
         model =Books
         fields = ("book_name","author","pic_cover","content")
         
-class TeacherForm(forms.ModelForm):
+class CreateteacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ("name","teach_pic","gender","school","available","subject")
+        fields = ("name","teach_pic","gender","school","available","number","subject")
         
 class EditProfileForm(forms.ModelForm):
     """

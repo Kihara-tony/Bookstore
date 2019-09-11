@@ -11,26 +11,26 @@
                     <div class="flip-card-inner">
                         {% for teach in teachers %}
                       <div class="flip-card-front">
-                            <h1>Name  {{ teach.name }}</h1>
-                            <img src="{{ teach.teach_pic.url }}" alt="image">
+                            <h1>{{ teach.name }}</h1>
+                            <img src="{{ teach.teach_pic.url }}" alt="image" height="150">
                             <p>Subjects I teach ; ({{ teach.subject }})</p>
                       </div>
                       <div class="flip-card-back">
-                            <div class="row">
-                                  <div class="col-md-3">
-                                          <p style="color:brown;">Gender :</p>
+                            <div class="column">
+                                  <div>
+                                          <p style="color:brown;font-size:1.2em;">Gender</p>
                                           <p>{{ teach.gender }}</p>
                                   </div>
-                                  <div class="col-md-3">
-                                          <p style="color:brown;">The school I teach in : </p>
+                                  <div>
+                                          <p style="color:brown;font-size:1.2em;">The school I teach in</p>
                                           <p>{{ teach.school }}</p>
                                   </div>
-                                  <div class="col-md-3">
-                                          <p style="color:brown;">Available :</p>
+                                  <div>
+                                          <p style="color:brown;font-size:1.2em; ">Available</p>
                                           <p>{{ teach.available }}</p>
                                   </div>
-                                  <div class="col-md-3">
-                                          <p style="color:brown;">Phone number :</p>
+                                  <div>
+                                          <p style="color:brown;font-size:1.2em;">Phone number</p>
                                           <p>{{ teach.number }}</p>
                                   </div>
                             </div>

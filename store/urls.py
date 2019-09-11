@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'teachers/', views.teachers, name='teachers'), #contact
     url(r'profile/',views.profile,name='profile'),
     url(r'edit_profile/',views.edit_profile,name='editprofile'),
+    url(r'addbook/',views.new_book,name="addbook"),
+    url(r'addteacher/',views.create_teacher,name='addteacher'),
+    # url(r'addteacher/<int:id>/',views.addteacher,name='addteacher'),
     url(r'about/',views.about,name='about')
 ]
 if settings.DEBUG:

@@ -4,7 +4,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Profile, Teacher, Books,Comment
-from .forms import  EditProfileForm, TeacherForm, BooksForm, CommentForm
+from .forms import  EditProfileForm, CreateteacherForm, BooksForm, CommentForm
 # Create your views here.
 def welcome(request):
     
@@ -14,6 +14,9 @@ def welcome(request):
 def books(request):
     books = Books.objects.all()
     return render(request,'books.html', {'books': books})
+def teachers(request):
+    teachers= Teacher.objects.all()
+    return render(request,'teachers.html',{'teachers':teachers})
 def book(request, books_id):
     """
     view function to render book
@@ -25,10 +28,7 @@ def book(request, books_id):
 
     return render(request, 'book.html',locals())
 
-# @login_required(login_url='/accounts/login/')
-def teachers(request):
-    teachers= Teacher.objects.all()
-    return render(request,'teachers.html',{'teachers':teachers})
+
 def teacher(request, teacher_id):
     """
     view function to render teacher
@@ -40,7 +40,7 @@ def teacher(request, teacher_id):
     
     return render(request, 'teacher.html',locals())
 
-@login_required(login_url='/registration/login/')
+@login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
     profile = Profile.objects.get(user =current_user)
@@ -48,7 +48,7 @@ def profile(request):
     teacher = Teacher.objects.filter(user= current_user)
     return render(request,'profile.html')
 
-@login_required(login_url='/registration/login/')
+@login_required(login_url='/accounts/login/')
 def edit_profile(request):
     form = EditProfileForm()
     current_user = request.user
@@ -58,25 +58,53 @@ def edit_profile(request):
             form.save()
             return redirect('profile')
     return render(request,'edit_profile.html',{'form':form})
-def updateach(request, id):
+@login_required(login_url='/accounts/login/')
+def create_teacher(request):
     """
     create teacher function
     :param request:
     :return:
     """
-    tch = Teacher.objects.get(id=id)
     if request.method == 'POST':
-        form = TeacherForm(request.POST, request.FILES, instance=tch)
+        form = CreateteacherForm(request.POST, request.FILES)
         if form.is_valid():
-            b = form.save(commit=False)
-            b.user = request.user.profile
-            b.teacher = request.user.profile.teacher
-            b.save()
-        return redirect('teacher', request.user.profile.teacher.id)
+            t = form.save(commit=False)
+            t.admin = request.user.profile
+            request.user.profile.save
+            t.save()
+        return redirect('welcome')
     else:
-        form = TeacherForm()
-    return render(request, 'createteacher.html', locals())
+        form = CreateteacherForm()
+    return render(request, 'add_teacher.html',{'form':form})
 
+# @login_required(login_url='/accounts/login/')
+# def addteacher(request, id):
+#     tch = Teacher.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = TeacherForm(request.POST, request.FILES, instance=tch)
+#         if form.is_valid():
+#             b = form.save(commit=False)
+#             b.user = request.user.profile
+#             b.teacher = request.user.profile.teacher.id
+#             b.save()
+#         return redirect('teacher', request.user.profile.teacher.id)
+#     else:
+#         form = TeacherForm()
+#     return render(request,id, 'createteacher.html', locals())
+@login_required(login_url='/accounts/login/')
+def new_book(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = BooksForm(request.POST, request.FILES)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.editor = current_user
+            book.save()
+        return redirect('books')
+
+    else:
+        form = BooksForm()
+    return render(request, 'addbook.html', {"form": form})
 def about(request):
     
     return render(request,'aboutus.html')

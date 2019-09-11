@@ -37,7 +37,7 @@ class Teacher(models.Model):
     gender = models.CharField(max_length=100,choices=GENDER_CHOICES)
     school = models.CharField(max_length=100, null=False)
     available = models.CharField(max_length=5, null=True,default='Yes/No')
-    number = models.IntegerField( null=False)
+    number = models.IntegerField(blank=True)
     subject = models.TextField(max_length=10000, null=False)
     def __str__(self):
         return self.name
@@ -67,7 +67,8 @@ class Books(models.Model):
     book_name = models.CharField(max_length=25, null=False,default='The abandon')
     author =models.CharField(max_length=25,null=False)
     pic_cover= models.ImageField(upload_to='media/', null=True)
-    content= models.FileField(upload_to='pdfs/',null=False,)
+    content= models.FileField(upload_to='pdfs/',null=False)
+    text=models.TextField(upload_to='pdfs/',null=False)
     def __str__(self):
         return self.author
 
