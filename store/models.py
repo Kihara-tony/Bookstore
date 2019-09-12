@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from io import BytesIO
 from django.core.files import File
-# from .utils import render_to_pdf
 
 
 # Create your models here.
@@ -81,13 +80,7 @@ class Books(models.Model):
     def delete_books(self):
         self.delete()
         
-    # def generate_obj_pdf(instance_id):
-    #  obj = Books.objects.get(id=instance_id)
-    #  context = {'instance': obj}
-    #  pdf = render_to_pdf('your/pdf/template.html', context)
-    #  filename = "Book_Order{}.pdf" %(obj.name)
-    #  obj.pdf.save(filename, File(BytesIO(pdf.content)))
-     
+    
     @classmethod
     def find_books(cls,book_search):
         """
